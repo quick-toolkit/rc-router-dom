@@ -103,7 +103,15 @@ typings/
 # TernJS port file
 .tern-port
 
-
+src/
 docs/
-dist/
 .idea/
+
+.babelrc
+.eslintrc
+tsconfig.json
+tsconfig.prod.cjs.json
+tsconfig.prod.json
+tsconfig.prod.types.json
+tsconfig.spec.json
+typedoc.json
