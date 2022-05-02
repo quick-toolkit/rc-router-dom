@@ -103,7 +103,5 @@ typings/
 # TernJS port file
 .tern-port
 
-
-docs/
 dist/
 .idea/
