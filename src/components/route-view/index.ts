@@ -45,8 +45,11 @@ export function RouteView(props: { children: ReactNode }): ReactElement {
   });
   const isMatch = useMatch(route.getFullPath());
   useEffect(() => {
-    if (isMatch && route.children && route.children.length) {
-      navigate(route.children[0].getFullPath());
+    if (isMatch) {
+      const hasPermissionFirstRoute = route.getHasPermissionFirstRoute();
+      if (hasPermissionFirstRoute) {
+        navigate(hasPermissionFirstRoute.getFullPath());
+      }
     }
   }, [isMatch, navigate, route.children]);
   return React.createElement(React.Fragment, {

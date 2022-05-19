@@ -36,8 +36,11 @@ function RouteView(props) {
     });
     var isMatch = (0, react_router_dom_1.useMatch)(route.getFullPath());
     (0, react_1.useEffect)(function () {
-        if (isMatch && route.children && route.children.length) {
-            navigate(route.children[0].getFullPath());
+        if (isMatch) {
+            var hasPermissionFirstRoute = route.getHasPermissionFirstRoute();
+            if (hasPermissionFirstRoute) {
+                navigate(hasPermissionFirstRoute.getFullPath());
+            }
         }
     }, [isMatch, navigate, route.children]);
     return react_1.default.createElement(react_1.default.Fragment, {
