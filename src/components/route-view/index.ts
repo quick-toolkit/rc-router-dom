@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 
-import { useReady, useRoute } from '../../hooks';
+import { useRoute } from '../../hooks';
 import React, {
   createElement,
   ReactElement,
@@ -39,19 +39,18 @@ import { useMatch, useNavigate } from 'react-router-dom';
 export function RouteView(props: { children: ReactNode }): ReactElement {
   const route = useRoute();
   const navigate = useNavigate();
-  useReady(() => {
-    const allParents = route.getAllParents().reverse().concat([route]);
-    document.title = allParents.map((o) => o.title).join('-');
-  });
   const isMatch = useMatch(route.getFullPath());
   useEffect(() => {
     if (isMatch) {
       const hasPermissionFirstRoute = route.getHasPermissionFirstRoute();
       if (hasPermissionFirstRoute) {
         navigate(hasPermissionFirstRoute.getFullPath());
+      } else {
+        const allParents = route.getAllParents().reverse().concat([route]);
+        document.title = allParents.map((o) => o.title).join('');
       }
     }
-  }, [isMatch, navigate, route.children]);
+  }, [isMatch, navigate, route]);
   return React.createElement(React.Fragment, {
     children: createElement(props.children as any),
   });

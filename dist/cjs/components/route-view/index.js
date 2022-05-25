@@ -30,10 +30,6 @@ var react_router_dom_1 = require("react-router-dom");
 function RouteView(props) {
     var route = (0, hooks_1.useRoute)();
     var navigate = (0, react_router_dom_1.useNavigate)();
-    (0, hooks_1.useReady)(function () {
-        var allParents = route.getAllParents().reverse().concat([route]);
-        document.title = allParents.map(function (o) { return o.title; }).join('-');
-    });
     var isMatch = (0, react_router_dom_1.useMatch)(route.getFullPath());
     (0, react_1.useEffect)(function () {
         if (isMatch) {
@@ -41,8 +37,12 @@ function RouteView(props) {
             if (hasPermissionFirstRoute) {
                 navigate(hasPermissionFirstRoute.getFullPath());
             }
+            else {
+                var allParents = route.getAllParents().reverse().concat([route]);
+                document.title = allParents.map(function (o) { return o.title; }).join('');
+            }
         }
-    }, [isMatch, navigate, route.children]);
+    }, [isMatch, navigate, route]);
     return react_1.default.createElement(react_1.default.Fragment, {
         children: (0, react_1.createElement)(props.children),
     });
