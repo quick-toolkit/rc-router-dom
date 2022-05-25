@@ -35,7 +35,7 @@ function RouteView(props) {
         if (isMatch) {
             var hasPermissionFirstRoute = route.getHasPermissionFirstRoute();
             if (hasPermissionFirstRoute) {
-                navigate(hasPermissionFirstRoute.getFullPath());
+                navigate(hasPermissionFirstRoute.getFullPath(), { replace: true });
             }
             else {
                 var allParents = route.getAllParents().reverse().concat([route]);

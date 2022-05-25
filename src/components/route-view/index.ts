@@ -44,7 +44,7 @@ export function RouteView(props: { children: ReactNode }): ReactElement {
     if (isMatch) {
       const hasPermissionFirstRoute = route.getHasPermissionFirstRoute();
       if (hasPermissionFirstRoute) {
-        navigate(hasPermissionFirstRoute.getFullPath());
+        navigate(hasPermissionFirstRoute.getFullPath(), { replace: true });
       } else {
         const allParents = route.getAllParents().reverse().concat([route]);
         document.title = allParents.map((o) => o.title).join('');
